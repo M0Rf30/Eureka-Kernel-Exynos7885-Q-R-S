@@ -10,7 +10,7 @@
  */
 
 #include "exynos7885-rmem.dtsi"
-#include "exynos7885.dtsi"
+#include "exynos7885.dts"
 #include "display-lcd_a7y18_common.dtsi"
 #include "modem-s327ap-sipc-pdata.dtsi"
 #include "battery_data_a7y18lte_common.dtsi"
