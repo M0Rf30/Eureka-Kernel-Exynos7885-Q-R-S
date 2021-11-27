@@ -196,7 +196,6 @@
 			compatible = "arm,cortex-a53", "arm,armv8";
 			reg = <0x0 0x100>;
 			enable-method = "psci";
-			clock-frequency = <1600000000>;
 			cpu-idle-states = <&BOOTCL_CPU_SLEEP>;
 			#cooling-cells = <2>; /* min followed by max */
 			logical-id = <0>;
@@ -207,7 +206,6 @@
 			compatible = "arm,cortex-a53", "arm,armv8";
 			reg = <0x0 0x101>;
 			enable-method = "psci";
-			clock-frequency = <1600000000>;
 			cpu-idle-states = <&BOOTCL_CPU_SLEEP>;
 			logical-id = <1>;
 		};
@@ -217,7 +215,6 @@
 			compatible = "arm,cortex-a53", "arm,armv8";
 			reg = <0x0 0x102>;
 			enable-method = "psci";
-			clock-frequency = <1600000000>;
 			cpu-idle-states = <&BOOTCL_CPU_SLEEP>;
 			logical-id = <2>;
 		};
@@ -227,7 +224,6 @@
 			compatible = "arm,cortex-a53", "arm,armv8";
 			reg = <0x0 0x103>;
 			enable-method = "psci";
-			clock-frequency = <1600000000>;
 			cpu-idle-states = <&BOOTCL_CPU_SLEEP>;
 			logical-id = <3>;
 		};
@@ -237,7 +233,6 @@
 			compatible = "arm,cortex-a53", "arm,armv8";
 			reg = <0x0 0x200>;
 			enable-method = "psci";
-			clock-frequency = <1600000000>;
 			cpu-idle-states = <&NONBOOTCL_CPU_SLEEP>;
 			logical-id = <4>;
 			sched_skip = <1>;
@@ -248,7 +243,6 @@
 			compatible = "arm,cortex-a53", "arm,armv8";
 			reg = <0x0 0x201>;
 			enable-method = "psci";
-			clock-frequency = <1600000000>;
 			cpu-idle-states = <&NONBOOTCL_CPU_SLEEP>;
 			logical-id = <5>;
 			sched_skip = <1>;
@@ -259,7 +253,6 @@
 			compatible = "arm,cortex-a73", "arm,armv8";
 			reg = <0x0 0x0>;
 			enable-method = "psci";
-			clock-frequency = <2200000000>;
 			cpu-idle-states = <&NONBOOTCL_CPU_SLEEP>;
 			#cooling-cells = <2>; /* min followed by max */
 			logical-id = <6>;
@@ -270,7 +263,6 @@
 			compatible = "arm,cortex-a73", "arm,armv8";
 			reg = <0x0 0x1>;
 			enable-method = "psci";
-			clock-frequency = <2200000000>;
 			cpu-idle-states = <&NONBOOTCL_CPU_SLEEP>;
 			logical-id = <7>;
 		};
@@ -307,7 +299,12 @@
 			cal-id = <ACPM_DVFS_CPUCL1>;
 			dm-type = <DM_CPU_CL0>;
 
-			min-freq = <208000>;
+			min-freq = <449000>;
+
+			eureka_min-freq = <208000>;
+			eureka_max-freq = <1794000>;
+			eureka_pm_qos-booting = <1690000>;
+			eureka_user-default-qos = <902000>;
 
 			/* PM QoS Class ID*/
 			pm_qos-min-class = <3>;
@@ -350,7 +347,12 @@
 			cal-id = <ACPM_DVFS_CPUCL0>;
 			dm-type = <DM_CPU_CL1>;
 
-			min-freq = <520000>;
+			min-freq = <936000>;
+
+			eureka_min-freq = <208000>;
+			eureka_max-freq = <2288000>;
+			eureka_pm_qos-booting = <2080000>;
+			eureka_user-default-qos = <1144000>;
 
 			/* PM QoS Class ID*/
 			pm_qos-min-class = <5>;
@@ -377,9 +379,7 @@
           					1352000  845000
           					1144000  676000
           					 936000  546000
-          					 728000  420000
-          					 520000  420000
-          					 312000  420000>;
+          					 728000  420000>;
       	};
 			};
 		};
@@ -819,11 +819,6 @@
 
 	smu_0: smu {
 		compatible = "samsung,exynos-smu";
-	};
-
-	secgpio_dvs {
-		compatible = "samsung,exynos7885-secgpio-dvs";
-		status = "okay";
 	};
 
 	dwmmc_0: dwmmc0@13500000 {
@@ -1400,9 +1395,6 @@
 		max_win = <4>; /* chagne to 6 ->4 */
 		default_win = <3>;
 		default_idma = <0>;
-		psr_mode = <2>;         /* 0: video mode, 1: DP command mode, 2: MIPI command mode */
-		trig_mode = <0>;        /* 0: hw trigger, 1: sw trigger */
-		dsi_mode = <0>;         /* 0: single dsi, 1: dual dsi */
 
 		/* 0: DSI, 1: eDP, 2:HDMI, 3: WB */
 		out_type = <0>;
@@ -2131,32 +2123,6 @@
 		eint_wkup_masks = <0x0648>;
 		eint_pends = <0xa00 0xa04 0xa08>;
 		conn_req_offset = <0x00d4>;	/* PMU_ALIVE__CONNECT_REQ_STATUS */
-	};
-
-	exynos-pm-extra{
-		compatible = "samsung,exynos-pm-extra";
-		wakeup_stats {
-			WAKEUP_STAT {
-				addr = <0x0600>;
-				bits_to_check = "0-30";
-				wakeup_sources = "EINT", "RTC_ALARM", "RTC_TICK", "TRTC_ALARM",
-					 "TRTC_TICK", "PCIE_WIFI0", "PCIE_WIFI1", "EXT_PCIE_WIFI0",
-					 "EXT_PCIE_WIFI1", "MMC0", "MMC1", "MMC2",
-					 "DECON", "I2S", "TIMER", "USB_REWA",
-					 "CP_SCAN_DUMP_REQ", "NFC_CLK_REQ", "USB20_PHY", "WIFI_ACTIVE",
-					 "CP_RESET_REQ", "GNSS_WAKEUP_REQ", "GNSS_RESET_REQ", "GNSS_ACTIVE",
-					 "INT_MBOX_CP", "CP_ACTIVE", "INT_MBOX_GNSS", "INT_MBOX_WIFI_CM4",
-					 "CORTEXM0_APM", "WIFI_RESET_REQ", "Reserved";
-
-				eint_wakeup_check_bit = <0>;
-			};
-
-			WAKEUP_STAT2 {
-				addr = <0x0604>;
-				bits_to_check = "8-10";
-				wakeup_sources = "INT_MBOX_CP_SECURE", "INT_MBOX_IN_APM", "INT_MBOX_WIFI_CR4";
-			};
-		};
 	};
 
 	exynos-powermode {

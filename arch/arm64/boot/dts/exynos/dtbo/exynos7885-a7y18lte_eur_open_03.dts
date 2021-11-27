@@ -10,6 +10,8 @@
  */
 
 /dts-v1/;
+/plugin/;
+
 #include "exynos7885-a7y18lte_common.dtsi"
 #include "exynos7885-a7y18lte_eur_open_gpio_03.dtsi"
 #include "exynos7885-a7y18lte_fingerprint-sensor_03.dtsi"
@@ -19,9 +21,9 @@
 	model_info-chip = <7885>;
 	model_info-platform = "android";
 	model_info-subtype = "samsung";
-	dtbo-model_info-hw_rev = <3>;
-	dtbo-model_info-hw_rev_end = <255>;
-	compatible = "samsung, A7Y18 EUR OPEN rev02", "samsung,Universal7885";
+	dtbo-hw_rev = <3>;
+	dtbo-hw_rev_end = <255>;
+	compatible = "samsung, A7Y18 EUR OPEN rev02", "samsung,EXYNOS7885";
 
 	 /* USIM DETECTION FOR CP */
 	usim_det {
@@ -30,11 +32,10 @@
 		mif,num_of_usim_det = <1>;
 		mif,usim-det0-gpio = <&gpa2 6 0>;
 	};
-
-	i2c_4:i2c@13870000 {
-		touchscreen@50 {
-			status = "okay";
-		};
-	};
 };
 
+&i2c_4 {
+	touchscreen@50 {
+		status = "okay";
+	};
+};
