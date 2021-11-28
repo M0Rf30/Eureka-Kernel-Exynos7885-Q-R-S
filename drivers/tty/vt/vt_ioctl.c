@@ -50,7 +50,7 @@ static inline bool vt_in_use(unsigned int i)
 	 */
 	WARN_CONSOLE_UNLOCKED();
 
-	return vc && kref_read(&vc->port.kref) > 1;
+	return vc;
 }
 
 static inline bool vt_busy(int i)
