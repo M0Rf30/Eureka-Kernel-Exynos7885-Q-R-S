@@ -908,8 +908,6 @@ int sec_debug_summary_init(void)
 	summary_info->magic[2] = SEC_DEBUG_SUMMARY_MAGIC2;
 	summary_info->magic[3] = SEC_DEBUG_SUMMARY_MAGIC3;
 
-	sec_debug_summary_set_kallsyms_info(summary_info);
-
 	pr_debug("%s done [%d]\n", __func__, offset);
 
 	return 0;
