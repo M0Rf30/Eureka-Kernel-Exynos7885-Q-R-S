@@ -19,10 +19,8 @@
 / {
 	model = "Samsung A7Y18LTE EUR OPEN rev02 board based on EXYNOS7885";
 	model_info-chip = <7885>;
-	model_info-platform = "android";
-	model_info-subtype = "samsung";
-	dtbo-hw_rev = <3>;
-	dtbo-hw_rev_end = <255>;
+	model_info-hw_rev = <3>;
+	model_info-hw_rev_end = <255>;
 	compatible = "samsung, A7Y18 EUR OPEN rev02", "samsung,EXYNOS7885";
 
 	 /* USIM DETECTION FOR CP */

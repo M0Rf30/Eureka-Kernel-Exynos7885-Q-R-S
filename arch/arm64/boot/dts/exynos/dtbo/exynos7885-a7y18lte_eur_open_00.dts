@@ -18,9 +18,9 @@
 
 / {
 	compatible = "samsung, A7Y18 EUR OPEN rev00", "samsung,EXYNOS7885";
-	
-	dtbo-hw_rev = <0>;
-	dtbo-hw_rev_end = <0>;
+	model_info-chip = <7885>;
+	model_info-hw_rev = <0>;
+	model_info-hw_rev_end = <0>;
 
 	fragment@model {
 		target-path = "/";

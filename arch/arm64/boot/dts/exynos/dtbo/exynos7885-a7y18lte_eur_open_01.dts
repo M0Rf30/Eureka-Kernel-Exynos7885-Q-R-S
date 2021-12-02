@@ -17,12 +17,10 @@
 #include "exynos7885-a7y18lte_fingerprint-sensor_00.dtsi"
 
 / {
-	model = "Samsung A7Y18LTE EUR OPEN rev00 board based on EXYNOS7885";
+	model = "Samsung A7Y18LTE EUR OPEN rev01 board based on EXYNOS7885";
 	model_info-chip = <7885>;
-	model_info-platform = "android";
-	model_info-subtype = "samsung";
-	dtbo-hw_rev = <1>;
-	dtbo-hw_rev_end = <2>;
+	model_info-hw_rev = <1>;
+	model_info-hw_rev_end = <2>;
 	compatible = "samsung, A7Y18 EUR OPEN rev01", "samsung,EXYNOS7885";
 
 	 /* USIM DETECTION FOR CP */
